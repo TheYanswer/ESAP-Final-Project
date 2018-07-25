@@ -1,4 +1,5 @@
-
+//this UDP code only is for carrying out one and only one function that corresponds to the packet that is received.
+//Modified by Luc H, the UDP code for repeating a function when a packet is received is located in the codes for the songs.
 
 #include <WiFi.h>
 #include <WiFiUdp.h>
