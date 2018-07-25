@@ -22,51 +22,51 @@ void setup()  {
   pinMode(2,OUTPUT);
   Serial.begin(115200);
   Serial.println();
-  Serial.print("Connecting to ");   Serial.println(ssid);
+  Serial.print("Connecting to ");   Serial.println(ssid);                       //Print that connection is in progress
 
-  WiFi.begin(ssid, password);
-  WiFi.config(myIPaddress, IPAddress(192, 168, 1, 1),
+  WiFi.begin(ssid, password);                                                   //Connect to WiFi
+  WiFi.config(myIPaddress, IPAddress(192, 168, 1, 1), 
               IPAddress(255, 255, 255, 0));
 
-  while (WiFi.status() != WL_CONNECTED) {
+  while (WiFi.status() != WL_CONNECTED) {                                       //print ........... to show that it is still connecting while WiFi is still not connected
     delay(500);
     Serial.print(".");
   }
 
-  Serial.println("WiFi connected");
+  Serial.println("WiFi connected");                                               //print connection successful!
   Serial.println("WiFi connected");
 
   UDPTestServer.begin(UDPPort);
 }
 void loop() {
-  handleUDPServer();
+  handleUDPServer();                                      //carry out "handleUDPServer" function
   delay(1);
 }
 
-void handleUDPServer() {
+void handleUDPServer() {                                  //set "handleUDPServer" as function
   int cb = UDPTestServer.parsePacket();
   if (cb) {
     UDPTestServer.read(packetBuffer, packetSize);
     String myData = "";
     for (int i = 0; i < packetSize; i++) {
-      myData += (char)packetBuffer[i];
+      myData += (char)packetBuffer[i];           //converts myData to characters
     }
     Serial.print(millis()); Serial.print(", ");
-    Serial.println (myData);
-    if (myData == "hF") {
-      digitalWrite(2, HIGH);
-      digitalWrite(hF,HIGH);
-      delay(strikeconstant);
-      digitalWrite(2, LOW);
-      digitalWrite(hF,LOW);
+    Serial.println (myData);                      //reads myData
+    if (myData == "hF") {                        //if myData in character form is "hF", execute the following function
+      digitalWrite(2, HIGH);                    //blink led to show action
+      digitalWrite(hF,HIGH);                    //turn on solenoid
+      delay(strikeconstant);                    //on time
+      digitalWrite(2, LOW);                     //turn off solenoid
+      digitalWrite(hF,LOW);                     //turn off led
     }
-    else if (myData == "hC") {
+    else if (myData == "hC") {                  //Pretty much same as above
       digitalWrite(hC,HIGH);
       digitalWrite(2,HIGH);
       delay(strikeconstant);
       digitalWrite(2, LOW);
       digitalWrite(hC,LOW);
-    }
+    } 
   else   if (myData == "Bb") {
     digitalWrite(Bb,HIGH);
     digitalWrite(2, HIGH);
