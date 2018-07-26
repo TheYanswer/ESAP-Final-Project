@@ -83,7 +83,7 @@ void setup()  {
 }
 void playnote()
 {
-  if(counter<95)
+  if(counter<300)
   {
     int waittime = (playmoment[counter]*1000) - (playmoment[counter-1]*1000);
     //   Serial.println(float(note[counter]));
