@@ -33,6 +33,7 @@ void setup()  {
   pinMode(17, OUTPUT);
   pinMode(5 , OUTPUT);
   pinMode(16, OUTPUT);
+  pinMode(2,OUTPUT);
   Serial.begin(115200);
   Serial.println();
   Serial.print("Connecting to ");   Serial.println(ssid);
@@ -48,7 +49,7 @@ void setup()  {
 
   Serial.println("WiFi connected");
   Serial.println("WiFi connected");
-
+  digitalWrite(2,HIGH);
   UDPTestServer.begin(UDPPort);
 }
 void playnote()
